@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<languages>
+  <language name="English" id="EN">
+	<plugins>
+	  <visitorgroupsusage>
+		<displayname>Visitor Groups Usage</displayname>
+		<description>This plugin showcases how visitor groups are utilized across different content within Optimizely.</description>
+		<type>Visitor Group</type>
+		<count>Usage Count</count>
+		<contentusages>Content Usages</contentusages>		
+		<contentInstanceSuggestions>There are &lt;strong&gt;{0}&lt;/strong&gt; visitor groups in total, with &lt;strong&gt;{1}&lt;/strong&gt; currently active.</contentInstanceSuggestions>
+		<itemsCount>Displaying items {0}-{1} of {2}</itemsCount>
+	  </visitorgroupsusage>
+	</plugins>
+  </language>
+</languages>

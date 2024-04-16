@@ -1,0 +1,43 @@
+﻿.epi-visitorGroupsUsage b, strong {
+    font-weight: 700 !important;
+}
+
+.epi-visitorGroupsUsage .disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.epi-visitorGroupsUsage .disabled-link {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.epi-visitorGroupsUsage .disabled a {
+    color: grey;
+}
+
+.epi-visitorGroupsUsage .active {
+    pointer-events: none;
+    font-weight: bold;
+}
+
+.epi-visitorGroupsUsage th {
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+.epi-visitorGroupsUsage .sub-table-col-small {
+    text-align: left !important;
+    width: 15% !important;
+    padding-left: 0 !important;
+}
+
+.epi-visitorGroupsUsage .sub-table-col-big {
+    text-align: left !important;
+    padding-left: 0 !important;
+}
+
+.epi-visitorGroupsUsage .notes-padding {
+    padding-top: 10px !important;
+    padding-right: 5px !important;
+}

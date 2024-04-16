@@ -1,0 +1,188 @@
+﻿@using EPiServer.Cms.Shell
+@using EPiServer.Core
+@using EPiServer.Shell
+@using EPiServer.Shell.Web.Mvc.Html
+@using EPiServer.Framework.Web.Resources
+@using VisitorGroupsUsage.ViewModels
+@using EPiServer.Framework.Localization
+@using EPiServer.Shell.Navigation
+
+@model VisitorGroupsUsageViewModel
+
+@{
+    Layout = string.Empty;
+    var adminModuleCss = Paths.ToClientResource("EPiServer.Cms.UI.Admin", "clientResources/dist/admin.bundle.css");
+    var styleCss = Paths.ToClientResource(typeof(VisitorGroupsUsageViewModel), "ClientResources/Styles/style.css");
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head>
+    <title>@LocalizationService.Current.GetString("/plugins/visitorgroupsusage/displayname")</title>
+
+    <!-- Admin CSS -->
+    <link href="@adminModuleCss" type="text/css" rel="stylesheet" />
+
+    <!-- Shell -->
+    @ClientResources.RenderResources("ShellCore")
+
+    <!-- LightTheme -->
+    @ClientResources.RenderResources("ShellCoreLightTheme")
+
+    <link href="@styleCss" type="text/css" rel="stylesheet" />
+
+</head>
+<body class="epi-visitorGroupsUsage">
+    @Html.CreatePlatformNavigationMenu()
+    <div @Html.ApplyPlatformNavigation() style="height: calc(100vh - 40px);">
+        <div class="content-area-container">
+            <div class="axiom-layout-grid-container content-types-container">
+                <div class="axiom-layout-grid">
+                    <div class="axiom-layout-grid__cell axiom-layout-grid__cell--span-4-small axiom-layout-grid__cell--span-8-medium axiom-layout-grid__cell--span-12-large axiom-layout-grid__cell--span-12-xlarge">
+                        <div class="axiom-grid-container content-types-list">
+                            <div class="epi-padding">
+
+                                <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large">
+                                    <div class="axiom-grid-container soft-double--top soft-quad--sides" style="padding-bottom: 0;">
+                                        <div class="axiom-grid">
+                                            <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large">
+                                                <div class="epi-main-header">
+                                                    <h1 class="epi-uif-typography mdc-typography--headline1">@Html.Translate("/plugins/visitorgroupsusage/displayName")</h1>
+                                                </div>
+                                            </div>
+                                            <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large">
+                                                <p class="epi-uif-typography mdc-typography--body1">
+                                                    @Html.Translate("/plugins/visitorgroupsusage/description")
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="epi-paddingVertical-small" id="divMainArea">
+                                    <div id="divContentInstances">
+
+                                        <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large">
+                                            <div class="axiom-grid-container soft-double--top soft-quad--sides">
+                                                <div class="axiom-grid">
+                                                    <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large">
+                                                        <span id="spnContentInstancesSuggestion">@Html.Raw(string.Format(Html.Translate("/plugins/visitorgroupsusage/contentInstanceSuggestions").ToString() ?? string.Empty, Model.TotalItemsCount, Model.TotalUnusedVisitorGroupsCount))</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (Model.Results != null && Model.Results.Any())
+                                        {
+                                            <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large content-table">
+                                                <table data-oui-component="true" class="oui-table oui-table--rule oui-table--loose" style="table-layout: fixed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">@Html.Translate("/plugins/visitorgroupsusage/type")</th>
+                                                            <th scope="col" style="width:10%">@Html.Translate("/plugins/visitorgroupsusage/count")</th>
+                                                            <th scope="col">@Html.Translate("/plugins/visitorgroupsusage/contentusages")</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var list in Model.Results)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <div><a href="@string.Format(Model.VisitorGroupUrl,list.Key.Id)" target="_blank">@list.Key.Name</a></div>
+                                                                    <div clas="notes-padding">@list.Key.Notes</div>
+                                                                </td>
+
+                                                                <td>
+                                                                    @list.Value.Count
+                                                                </td>
+                                                                <td style="text-align:left">
+                                                                    @if (list.Value.Any())
+                                                                    {
+                                                                        <table style="width:100%">
+                                                                            @foreach (var content in list.Value)
+                                                                            {
+                                                                                var type = "Page";
+                                                                                var fullName = content.GetType().FullName;
+                                                                                if (!string.IsNullOrEmpty(fullName) && fullName.Contains("FormContainerBlock", StringComparison.OrdinalIgnoreCase))
+                                                                                {
+                                                                                    type = "Form";
+                                                                                }
+                                                                                else if (typeof(BlockData).IsAssignableFrom(content.GetType().BaseType))
+                                                                                {
+                                                                                    type = "Block";
+                                                                                }
+                                                                                <tr>
+                                                                                    <td class="sub-table-col-small">@type</td>
+                                                                                    <td class="sub-table-col-small">@content.LanguageBranch()</td>
+                                                                                    <td class="sub-table-col-big">
+                                                                                        <a href="@string.Format(Model.EditUrl, content.LanguageBranch(), content.ContentLink.ID)" target="_blank">@content.Name</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        </table>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <text>
+                                                                            Unused
+                                                                        </text>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                @if (Model.Results != null && Model.Results.Any())
+                                {
+                                    <br />
+                                    <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large" style="float: left">
+                                        <div class="axiom-grid-container soft-double--top soft-quad--sides">
+                                            <div class="axiom-grid">
+                                                <div class="axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-8-medium axiom-grid__cell--span-12-large">
+                                                    <nav class="oui-pagination-controls" data-test-section="">
+                                                        <div class=" axiom-grid__cell axiom-grid__cell--span-4-small axiom-grid__cell--span-4-medium axiom-grid__cell--span-4-large">
+                                                            @string.Format(Html.Translate("/plugins/visitorgroupsusage/itemsCount").ToString() ?? string.Empty, Model.MinIndexOfItem, Model.MaxIndexOfItem, Model.TotalItemsCount) &nbsp; &nbsp; &nbsp; &nbsp;
+                                                        </div>
+
+                                                        <ul class="flex flex-justified--center flex-align--center">
+                                                            <li class="push--sides @(Model.PageNumber > 1 ? "" : "disabled")">
+                                                                <a class="page-link" href="@Model.PageUrl(Model.PageNumber - 1)" aria-label="Previous">
+                                                                    <span aria-hidden="true">Previous</span>
+                                                                </a>
+                                                            </li>
+
+                                                            @foreach (var i in Model.Pages)
+                                                            {
+                                                                if (i == 0)
+                                                                {
+                                                                    <li>&nbsp; <span data-feather="more-horizontal"></span> &nbsp;</li>
+                                                                    continue;
+                                                                }
+
+                                                                <li class="push--sides  @(i == Model.PageNumber ? "active" : "")"><a class="page-link" href="@Model.PageUrl(i)">@i</a></li>
+                                                            }
+
+                                                            <li class="push--sides @(Model.PageNumber < Model.TotalPagesCount ? "" : "disabled")">
+                                                                <a class="page-link" href="@Model.PageUrl(Model.PageNumber + 1)" aria-label="Next">
+                                                                    <span aria-hidden="true">Next</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+	<OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+	<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<OutputPath>bin\</OutputPath>
+	<PackageId>A2Z.VisitorGroupsUsage</PackageId>
+	<Version>1.0.0.0</Version>
+	<Description>A plugin designed to identify and report on the usage of visitor groups across various content within Optimizely.</Description>
+	<Authors>Adnan Zameer</Authors>
+	<IsPackable>True</IsPackable>
+	<PackageReleaseNotes>https://github.com/adnanzameer/optimizely-visitor-groups-usage/blob/master/CHANGELOG.md</PackageReleaseNotes>
+	<PackageProjectUrl>https://github.com/adnanzameer/optimizely-visitor-groups-usage</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/adnanzameer/optimizely-visitor-groups-usage</RepositoryUrl>
+	<RepositoryType>Git</RepositoryType>
+	<PackageTags>Optimizely Episerver Visitor Groups Personalization A2Z VisitorGroups UserBehavior report</PackageTags>
+	<NuspecFile>VisitorGroupsUsage.nuspec</NuspecFile>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+	<Content Remove="module.config" />
+	<_ContentIncludedByDefault Remove="A2Z.VisitorGroupsUsage.targets" />
+	<_ContentIncludedByDefault Remove="VisitorGroupsUsage.nuspec" />
+	<_ContentIncludedByDefault Remove="VisitorGroupsUsage.zip" />
+	<Content Include="readme.txt">
+	  <PackagePath>readme.txt</PackagePath>
+	</Content>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Include="EmbeddedLangFiles\Plugins_en.xml" />
+	<None Include="module.config" />
+  </ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="EPiServer.CMS.UI.Core" Version="12.4.0" />
+  </ItemGroup>
+</Project>
