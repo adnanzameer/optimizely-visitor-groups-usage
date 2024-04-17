@@ -13,7 +13,7 @@ namespace VisitorGroupsUsage
     [ModuleDependency(typeof(EPiServer.Web.InitializationModule))]
     public class InitializeServices : IConfigurableModule
     {
-        private static readonly Action<AuthorizationPolicyBuilder> DefaultPolicy = p => p.RequireRole(Roles.Administrators, Roles.WebAdmins, Roles.CmsAdmins);
+        private static readonly Action<AuthorizationPolicyBuilder> DefaultPolicy = p => p.RequireRole(Roles.Administrators, Roles.WebAdmins, Roles.CmsAdmins, Roles.CmsEditors, Roles.WebEditors);
 
         void IConfigurableModule.ConfigureContainer(ServiceConfigurationContext context)
         {
