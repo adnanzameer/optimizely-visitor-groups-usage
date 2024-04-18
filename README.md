@@ -23,6 +23,8 @@ dotnet add package A2Z.VisitorGroupsUsage
 
 To access the add-on, go to `Add-ons -> Visitor Groups Usage`
 
+![Visitor Groups Usage](img/visitor-groups-usage.png)
+
 ## Contributing
 
 Feel free to submit a pull request if you identify any areas that could be enhanced or improved.
