@@ -14,8 +14,9 @@
 	<PackageReleaseNotes>https://github.com/adnanzameer/optimizely-visitor-groups-usage/blob/master/CHANGELOG.md</PackageReleaseNotes>
 	<PackageProjectUrl>https://github.com/adnanzameer/optimizely-visitor-groups-usage</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/adnanzameer/optimizely-visitor-groups-usage</RepositoryUrl>
+	<iconUrl>https://raw.githubusercontent.com/adnanzameer/optimizely-visitor-groups-usage/master/VisitorGroupsUsage/icon.png</iconUrl>
 	<RepositoryType>Git</RepositoryType>
-	<PackageTags>Optimizely Episerver Visitor Groups Personalization A2Z VisitorGroups UserBehavior report</PackageTags>
+	<tags>Optimizely Episerver Visitor Groups Personalization A2Z VisitorGroupsUsage VisitorGroup Report VisitorGroupUsage</tags>
 	<NuspecFile>VisitorGroupsUsage.nuspec</NuspecFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

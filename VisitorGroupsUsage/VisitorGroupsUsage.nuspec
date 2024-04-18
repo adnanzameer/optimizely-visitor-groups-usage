@@ -2,9 +2,10 @@
 <package >
   <metadata>
 	<id>A2Z.VisitorGroupsUsage</id>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<title>Visitor Groups Usage</title>
 	<icon>icon.png</icon>
+	<iconUrl>https://raw.githubusercontent.com/adnanzameer/optimizely-visitor-groups-usage/master/VisitorGroupsUsage/icon.png</iconUrl>
 	<authors>Adnan Zameer</authors>
 	<owners>Adnan Zameer</owners>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,7 +13,7 @@
 	<projectUrl>https://github.com/adnanzameer/optimizely-visitor-groups-usage</projectUrl>
 	<releaseNotes>https://github.com/adnanzameer/optimizely-visitor-groups-usage/blob/master/CHANGELOG.md</releaseNotes>
 	<copyright>Copyright 2024</copyright>
-	<tags>Optimizely Episerver Visitor Groups Personalization A2Z VisitorGroups UserBehavior report</tags>
+	<tags>Optimizely Episerver Visitor Groups Personalization A2Z VisitorGroupsUsage VisitorGroup Report VisitorGroupUsage</tags>
 	<dependencies>
 	  <group targetFramework=".NETCoreApp,Version=v6.0">
 		<dependency id="EPiServer.CMS.UI.Core" version="[12.4.0,13.0.0)" />
